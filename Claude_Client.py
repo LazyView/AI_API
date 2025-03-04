@@ -9,7 +9,7 @@ class ClaudeClient:
         self.prompt_manager = PromptManager()
         self.prompt_manager.register_default_templates()
 
-        self.api_key = "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"
+        self.api_key = "Vyplnit"
         self.api_url = "https://api.anthropic.com/v1/messages"
         self.headers = {
             "x-api-key": self.api_key,
