@@ -9,7 +9,6 @@ def main():
     parser.add_argument("--focus", default="hlavní myšlenky", help="Na co se zaměřit v souhrnu")
     parser.add_argument("--tone", default="formální", help="Tón souhrnu")
     args = parser.parse_args()
-
     # Načtení obsahu souboru
     try:
         with open(args.file, 'r', encoding='utf-8') as f:

@@ -1,8 +1,28 @@
+"""Modul pro správu a generování dynamických promptů pro Claude API."""
 class PromptTemplate:
+    """Třída reprezentující šablonu promptu s možností formátování."""
     def __init__(self, template_string):
+        """
+       Inicializuje novou šablonu promptu.
+
+       Args:
+           template_string (str): String šablony s placeholdery pro formátování.
+       """
         self.template = template_string
 
     def format(self, **kwargs):
+        """
+        Vyplní šablonu dodanými proměnnými.
+
+        Args:
+            **kwargs: Klíčové argumenty odpovídající placeholderům v šabloně.
+
+        Returns:
+            str: Formátovaný prompt.
+
+        Raises:
+            ValueError: Pokud chybí některá požadovaná proměnná.
+        """
         try:
             return self.template.format(**kwargs)
         except KeyError as e:
@@ -10,6 +30,7 @@ class PromptTemplate:
 
 
 class PromptManager:
+    """Správce šablon promptů."""
     def __init__(self):
         self.templates = {}
 

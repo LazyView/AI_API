@@ -91,33 +91,3 @@ class ClaudeClient:
         """Načte historii konverzace ze souboru."""
         with open(filename, 'r', encoding='utf-8') as f:
             self.conversation_history = json.load(f)
-
-# Příklad použití
-if __name__ == "__main__":
-    # Vytvoření instance klienta
-    client = ClaudeClient("")
-
-    # Poslání zprávy
-    question = "Vysvětli, jak funguje rekurzivní funkce v programování. Uveď příklad v Pythonu."
-    print(f"\nOtázka: {question}\n")
-
-    # Měření času odpovědi
-    start_time = time.time()
-    response = client.send_message(question)
-    end_time = time.time()
-
-    print(f"Odpověď (za {end_time - start_time:.2f} sekund):\n{response}\n")
-
-    # Pokračování konverzace
-    follow_up = "Můžeš ukázat ještě jeden složitější příklad rekurze?"
-    print(f"Doplňující otázka: {follow_up}\n")
-
-    start_time = time.time()
-    response = client.send_message(follow_up)
-    end_time = time.time()
-
-    print(f"Odpověď (za {end_time - start_time:.2f} sekund):\n{response}\n")
-
-    # Uložení konverzace
-    client.save_history("conversation.json")
-    print("Konverzace byla uložena do souboru conversation.json")
