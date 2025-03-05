@@ -5,12 +5,14 @@ import time
 from typing import List, Dict, Any, Optional
 from Prompt_Template import PromptManager
 from Response_Parser import ResponseParser
+from secrets import API_KEY
 class ClaudeClient:
+
     def __init__(self):
         self.prompt_manager = PromptManager()
         self.prompt_manager.register_default_templates()
         self.response_parser = ResponseParser()
-        self.api_key = "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"
+        self.api_key = API_KEY
         self.api_url = "https://api.anthropic.com/v1/messages"
         self.headers = {
             "x-api-key": self.api_key,
