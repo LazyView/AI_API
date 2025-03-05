@@ -4,12 +4,13 @@ import os
 import time
 from typing import List, Dict, Any, Optional
 from Prompt_Template import PromptManager
+from Response_Parser import ResponseParser
 class ClaudeClient:
-    def __init__(self, api_key: Optional[str] = None):
+    def __init__(self):
         self.prompt_manager = PromptManager()
         self.prompt_manager.register_default_templates()
-
-        self.api_key = "Vyplnit"
+        self.response_parser = ResponseParser()
+        self.api_key = "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"
         self.api_url = "https://api.anthropic.com/v1/messages"
         self.headers = {
             "x-api-key": self.api_key,
@@ -57,7 +58,6 @@ class ClaudeClient:
 
             # Extrakce textu odpovědi
             assistant_message = result["content"][0]["text"]
-
             # Přidání odpovědi do historie
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
 
@@ -91,3 +91,29 @@ class ClaudeClient:
         """Načte historii konverzace ze souboru."""
         with open(filename, 'r', encoding='utf-8') as f:
             self.conversation_history = json.load(f)
+
+    def analyze_text(self, text, max_tokens=2000):
+        """
+        Provede strukturovanou analýzu textu.
+
+        Args:
+            text (str): Text k analýze
+            max_tokens (int): Maximální počet tokenů v odpovědi
+
+        Returns:
+            dict: Strukturovaná analýza s klíči: summary, key_points, analysis, context, conclusions
+        """
+        response = self.send_templated_message(
+            "structured_analysis",
+            max_tokens=max_tokens,
+            input_text=text
+        )
+        print("====SUROVA ODPOVED====")
+        print(response)
+        print("================")
+        # Správné vytvoření instance parseru a předání textu
+        parser = ResponseParser()
+        structured_data = parser.parse_structured_analysis(response)  # Zde musí být předán response
+
+        return structured_data
+

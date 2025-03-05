@@ -93,5 +93,34 @@ DEFAULT_TEMPLATES = {
         Otázka: {question}
         Dodatečný kontext:
         {context}
+        """,
+    "structured_analysis":
+        """
+        Proveď detailní strukturovanou analýzu následujícího textu:
+        
+        {input_text}
+        
+        Tvoje odpověď MUSÍ dodržet přesně tento formát a obsahovat všechny tyto sekce v přesně tomto pořadí:
+        
+        # SOUHRN
+        Stručné shrnutí celého textu v 2-3 větách.
+        
+        # KLÍČOVÉ BODY
+        • První klíčový bod
+        • Druhý klíčový bod
+        • Třetí klíčový bod
+        • Čtvrtý klíčový bod
+        • Pátý klíčový bod
+        
+        # ANALÝZA
+        Detailní analýza obsahu rozdělená do odstavců.
+        
+        # KONTEXT
+        Zasazení textu do širšího kontextu.
+        
+        # ZÁVĚRY
+        Hlavní závěry a doporučení.
+        
+        Je KRITICKY DŮLEŽITÉ, abys odpověď formátoval přesně podle této šablony včetně použití #, nadpisů a odrážek.
         """
 }
