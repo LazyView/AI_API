@@ -1,34 +1,26 @@
-import argparse
-from Claude_Client import ClaudeClient
 
-def read_multiline_text():
-    print("Zadejte text (ukončete řádkem obsahujícím pouze 'END'):")
-    lines = []
-    while True:
-        try:
-            line = input()
-            if line == "END":
-                break
-            lines.append(line)
-        except EOFError:
-            break
-    return '\n'.join(lines)
+def analyze_text(client, responseParser, text, max_tokens=2000):
+    """
+    Provede strukturovanou analýzu textu.
 
-def main():
-    sample_text = read_multiline_text()
+    Args:
+        text (str): Text k analýze
+        max_tokens (int): Maximální počet tokenů v odpovědi
 
-    client = ClaudeClient()
-    result = client.analyze_text(sample_text)
-    # Výpis výsledků
-    print("SOUHRN:")
-    print(result["summary"])
-    print("\nKLÍČOVÉ BODY:")
-    for i, point in enumerate(result["key_points"], 1):
-        print(f"{i}. {point}")
-    print("\nZÁVĚRY:")
-    print(result["conclusions"])
+    Returns:
+        dict: Strukturovaná analýza s klíči: summary, key_points, analysis, context, conclusions
+    """
+    response = client.send_templated_message(
+        "structured_analysis",
+        max_tokens=max_tokens,
+        input_text=text
+    )
+    print("====SUROVA ODPOVED====")
+    print(response)
+    print("================")
+    # Správné vytvoření instance parseru a předání textu
+    structured_data = responseParser.parse_structured_analysis(response)  # Zde musí být předán response
 
-if __name__ == "__main__":
-    main()
+    return structured_data
 
 

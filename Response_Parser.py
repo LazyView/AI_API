@@ -3,7 +3,6 @@
 Modul pro parsování a extrakci dat z odpovědí Claude API.
 """
 import re
-import json
 
 
 class ResponseParser:

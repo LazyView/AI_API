@@ -94,28 +94,5 @@ class ClaudeClient:
         with open(filename, 'r', encoding='utf-8') as f:
             self.conversation_history = json.load(f)
 
-    def analyze_text(self, text, max_tokens=2000):
-        """
-        Provede strukturovanou analýzu textu.
 
-        Args:
-            text (str): Text k analýze
-            max_tokens (int): Maximální počet tokenů v odpovědi
-
-        Returns:
-            dict: Strukturovaná analýza s klíči: summary, key_points, analysis, context, conclusions
-        """
-        response = self.send_templated_message(
-            "structured_analysis",
-            max_tokens=max_tokens,
-            input_text=text
-        )
-        print("====SUROVA ODPOVED====")
-        print(response)
-        print("================")
-        # Správné vytvoření instance parseru a předání textu
-        parser = ResponseParser()
-        structured_data = parser.parse_structured_analysis(response)  # Zde musí být předán response
-
-        return structured_data
 
