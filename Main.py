@@ -1,6 +1,6 @@
 from Claude_Client import ClaudeClient
+from Few_Shot_Prompt_Builder import FewShotPromptBuilder
 from Prompt_chaining_manager import ChainingManager
-from Optimized_Claude_Client import OptimizedApiClient
 
 
 
@@ -8,6 +8,9 @@ def main():
     # Příklad použití PromptChain
     client = ClaudeClient()
     # OptimizedClient = OptimizedApiClient(client, 100, 10)
+
+    # Chain manager implementation
+    """
     chain = ChainingManager(client)
 
     # Nastavení šablon pro jednotlivé kroky
@@ -59,6 +62,41 @@ def main():
     print(f"Klíčová slova: {results['keywords']}")
     print(f"Shrnutí: {results['summary']}")
     print(f"Titulek: {results['title']}")
+    """
 
+
+    # Příklad použití FewShotPromptBuilder
+    fs_builder = FewShotPromptBuilder()
+
+    # Přidání příkladů pro kategorii "překlad"
+    fs_builder.add_example(
+        category="překlad",
+        example_input="Přelož do angličtiny: Dobrý den, jak se máte?",
+        example_output="Good day, how are you?"
+    )
+    fs_builder.add_example(
+        category="překlad",
+        example_input="Přelož do angličtiny: Jsem programátor a učím se pracovat s AI.",
+        example_output="I am a programmer and I am learning to work with AI."
+    )
+
+    # Přidání příkladů pro kategorii "vysvětlení"
+    fs_builder.add_example(
+        category="vysvětlení",
+        example_input="Vysvětli pojem 'strojové učení' jednoduše, jako bys to vysvětloval/a dítěti.",
+        example_output="Strojové učení je, když počítače umí samy zjistit, jak řešit úkoly, podobně jako ty, když se učíš něco nového. Místo toho, aby jim někdo řekl, co mají přesně dělat, sbírají zkušenosti a samy se rozhodují. Trochu jako když se učíš jezdit na kole - čím víc jezdíš, tím lépe ti to jde."
+    )
+
+    # Vytvoření few-shot promptu
+    query = "Vysvětli: Černé díry."
+    prompt = fs_builder.build_prompt(
+        query=query,
+        category="vysvětlení",
+        num_examples=2,
+        instruction="Jsi expertní na vesmír, specialozovaný na černé díry. Vysvětli pojem černá díra."
+    )
+
+    response = client.send_message(prompt)
+    print(f"Odpověď: {response}")
 if __name__ == "__main__":
     main()
