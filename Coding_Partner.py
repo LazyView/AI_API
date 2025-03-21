@@ -1,6 +1,6 @@
 from Claude_Client import ClaudeClient
 from Optimized_Claude_Client import OptimizedApiClient
-
+import re
 
 class CodingPartner:
     """AI-powered coding assistant using Claude API."""
@@ -83,7 +83,7 @@ class CodingPartner:
                 
                 Maintain the same functionality and structure. Add comments to explain any significant changes
                 required due to language differences.
-            """
+            """,
         }
 
         # Register templates with the client
@@ -130,7 +130,7 @@ class CodingPartner:
 
         # Extract optimized code from response
         # This is a simplified extraction - a real implementation would be more robust
-        import re
+
         code_blocks = re.findall(r"```(?:\w+)?\n(.*?)```", response, re.DOTALL)
 
         if code_blocks:
@@ -161,7 +161,6 @@ class CodingPartner:
         )
 
         # Extract code from response
-        import re
         code_blocks = re.findall(r"```(?:\w+)?\n(.*?)```", response, re.DOTALL)
 
         if code_blocks:
@@ -189,7 +188,6 @@ class CodingPartner:
         )
 
         # Extract fixed code from response
-        import re
         code_blocks = re.findall(r"```(?:\w+)?\n(.*?)```", response, re.DOTALL)
 
         if code_blocks:
@@ -220,7 +218,6 @@ class CodingPartner:
         )
 
         # Extract translated code from response
-        import re
         code_blocks = re.findall(r"```(?:\w+)?\n(.*?)```", response, re.DOTALL)
 
         if code_blocks:

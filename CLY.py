@@ -6,8 +6,6 @@ from Interactive_mode import interactive_mode
 def main():
     """Command-line interface for the Coding Partner."""
     import argparse
-    import os
-
     parser = argparse.ArgumentParser(description="AI-powered coding assistant")
 
     # Add interactive mode as a separate argument group
@@ -39,6 +37,5 @@ def main():
     partner = CodingPartner(api_key)
 
     # Rest of your code for handling different actions...
-
 if __name__ == '__main__':
     main()
